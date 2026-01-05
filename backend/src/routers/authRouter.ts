@@ -1,17 +1,20 @@
 import { Router } from 'express';
 import { z } from 'zod';
-import { loginSchema } from '../schemas/authSchema';
-import { loginControl } from '../controllers/authController';
+import { loginSchema, signUpSchema } from '../schemas/authSchema';
+import { loginControl, signUpControl } from '../controllers/authController';
+import { createUser } from '../db/authRepo';
 
 const authRouter = Router();
 
 authRouter.post('/signup', (req, res) => {
-    const result = loginSchema.safeParse(req.body);
+    const result = signUpSchema.safeParse(req.body);
 
     if (!result.success) {
         return res.status(400).json({
             errors: result.error.issues,
         })
+    } else {
+        signUpControl(res, result.data);
     }
 })
 
@@ -22,9 +25,9 @@ authRouter.post('/login', (req, res) => {
         return res.status(400).json(
             z.treeifyError(result.error),
         )
+    } else {
+        loginControl(res, result.data);
     }
-
-    loginControl(res, result.data);
 });
 
 export default authRouter;
