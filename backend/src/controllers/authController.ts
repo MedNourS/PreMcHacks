@@ -1,7 +1,7 @@
 import type { Response } from 'express';
 import jwt from 'jsonwebtoken';
 import type { signUpCredentials, loginCredentials } from '../types/authTypes';
-import { createUser, loginUser } from '../db/authRepo';
+import { createUser, loginUser } from '../db/userRepo';
 
 export async function signUpControl(res: Response, credentials: signUpCredentials) {
     const { username, email, password } = credentials;

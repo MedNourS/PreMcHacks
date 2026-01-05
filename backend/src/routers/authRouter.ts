@@ -2,7 +2,6 @@ import { Router } from 'express';
 import { z } from 'zod';
 import { loginSchema, signUpSchema } from '../schemas/authSchema';
 import { loginControl, signUpControl } from '../controllers/authController';
-import { createUser } from '../db/authRepo';
 
 const authRouter = Router();
 
