@@ -3,9 +3,15 @@
 **NOTICE:** All endpoints under `/user` require authentication. In order to access, you must use `credentials: 'include'` in your fetch requests. For example:
 
 ```javascript
-fetch('/user/profile', {
-  method: 'GET',
-  credentials: 'include'
+fetch('/user/username', {
+  method: 'PATCH',
+  credentials: 'include',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    username: 'SampleUsername'
+  })
 });
 ```
 
