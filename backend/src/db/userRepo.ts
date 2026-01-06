@@ -45,7 +45,6 @@ export async function loginUser(identifier: string, password: string) {
     return user.id;
 }
 
-
 export function getUserById(userId: number): User | null {
     const stmt = db.prepare('SELECT * FROM users WHERE id = ?');
     const row = stmt.get(userId);
@@ -53,4 +52,19 @@ export function getUserById(userId: number): User | null {
     if (!row) return null;
 
     return row as User;
+}
+
+export function changeUsername(userId: number, newUsername: string): { success: boolean; error?: string } {
+    const stmt = db.prepare(`
+        UPDATE users
+        SET username = ?
+        WHERE id = ?
+    `);
+
+    try {
+        stmt.run(newUsername, userId);
+        return { success: true };
+    } catch (e) {
+        return { success: false, error: "Failed to update username: another user already exists with that username" };
+    }
 }
