@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { z } from 'zod';
 import { loginSchema, signUpSchema } from '../schemas/authSchema';
-import { loginControl, signUpControl } from '../controllers/authController';
+import { loginControl, logoutControl, signUpControl } from '../controllers/authController';
 
 const authRouter = Router();
 
@@ -27,6 +27,10 @@ authRouter.post('/login', (req, res) => {
     } else {
         loginControl(res, result.data);
     }
+});
+
+authRouter.post('/logout', (req, res) => {
+    logoutControl(res);
 });
 
 export default authRouter;

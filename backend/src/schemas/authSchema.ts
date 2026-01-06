@@ -10,3 +10,9 @@ export const loginSchema = z.object({
     identifier: z.string(),
     password: z.string().min(8),
 });
+
+export const jwtPayloadSchema = z.object({
+    sub: z.string(),
+    exp: z.number(),
+    iat: z.number(),
+});

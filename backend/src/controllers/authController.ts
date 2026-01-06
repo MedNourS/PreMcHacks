@@ -23,7 +23,7 @@ export async function loginControl(res: Response, credentials: loginCredentials)
     const userId = await loginUser(identifier, password);
 
     if (!userId) {
-        return res.status(401).json({ error: "Invalid credentials" });
+        return res.status(401).json({ success: false, error: "Invalid credentials" });
     }
 
     const token = jwt.sign(
@@ -36,7 +36,16 @@ export async function loginControl(res: Response, credentials: loginCredentials)
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
-        maxAge: 7 * 24 * 60 * 60 * 1000,
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
         path: "/",
-    }).status(200).json({ ok: true });
+    }).status(200).json({ success: true });
+}
+
+export function logoutControl(res: Response) {
+    res.clearCookie("auth", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        path: "/",
+    }).status(200).json({ success: true });
 }
