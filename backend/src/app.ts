@@ -7,7 +7,7 @@ import authRouter from './routers/authRouter';
 import calendarRouter from './routers/calendarRouter';
 import tasksRouter from './routers/tasksRouter';
 import userRouter from './routers/userRouter';
-import { authMiddleware } from './middleware';
+import { authMiddleware, testMiddleware } from './middleware';
 
 const app = express();
 
@@ -21,6 +21,6 @@ app.use('/ask', authMiddleware, askRouter);
 app.use('/auth', authRouter);
 app.use('/calendar', authMiddleware, calendarRouter);
 app.use('/tasks', authMiddleware, tasksRouter);
-app.use('/user', authMiddleware, userRouter);
+app.use('/user', testMiddleware, userRouter);
 
 export default app;
