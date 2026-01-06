@@ -57,7 +57,7 @@ export function getUserById(userId: number): User | null {
 export function changeUsername(userId: number, newUsername: string): { success: boolean; error?: string } {
     const stmt = db.prepare(`
         UPDATE users
-        SET username = ?
+        SET username = ?, updated_at = CURRENT_TIMESTAMP
         WHERE id = ?
     `);
 
