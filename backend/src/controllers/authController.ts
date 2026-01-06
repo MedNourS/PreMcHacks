@@ -9,10 +9,11 @@ export async function signUpControl(res: Response, credentials: signUpCredential
     const userCreation = await createUser(username, email, password);
 
     if (!userCreation.success) {
-        return res.status(400).json({ error: userCreation.error });
+        return res.status(400).json({ success: false, error: userCreation.error });
     }
 
     return res.status(201).json({
+        success: true,
         message: 'User successfully created'
     });
 }
@@ -38,7 +39,7 @@ export async function loginControl(res: Response, credentials: loginCredentials)
         sameSite: "lax",
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
         path: "/",
-    }).status(200).json({ success: true });
+    }).status(200).json({ success: true, message: "Login successful" });
 }
 
 export function logoutControl(res: Response) {
