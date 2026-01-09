@@ -54,7 +54,7 @@ export function getUserById(userId: number): User | null {
     return row as User;
 }
 
-export function changeUsername(userId: number, newUsername: string): { success: boolean; error?: string } {
+export function changeUsername(userId: number, newUsername: string): { success: boolean; message?: string; error?: string } {
     const stmt = db.prepare(`
         UPDATE users
         SET username = ?, updated_at = CURRENT_TIMESTAMP
@@ -63,8 +63,23 @@ export function changeUsername(userId: number, newUsername: string): { success: 
 
     try {
         stmt.run(newUsername, userId);
-        return { success: true };
+        return { success: true, message: "Username updated successfully" };
     } catch (e) {
         return { success: false, error: "Failed to update username: another user already exists with that username" };
+    }
+}
+
+export function changeEmail(userId: number, newEmail: string): { success: boolean; message?: string; error?: string } {
+    const stmt = db.prepare(`
+        UPDATE users
+        SET email = ?, updated_at = CURRENT_TIMESTAMP
+        WHERE id = ?
+    `);
+
+    try {
+        stmt.run(newEmail, userId);
+        return { success: true, message: "Email updated successfully" };
+    } catch (e) {
+        return { success: false, error: "Failed to update email: another user already exists with that email" };
     }
 }

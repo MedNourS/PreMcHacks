@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import { changeUsername, getUserById } from '../db/userRepo';
+import { changeEmail, changeUsername, getUserById } from '../db/userRepo';
 
 export function profileControl(res: Response, userData: { id: number } | undefined) {
     const user = getUserById(userData!.id);
@@ -26,5 +26,14 @@ export function usernameControl(res: Response, user: { id: number } | undefined,
         return res.status(400).json({ success: false, error: result.error });
     } else {
         return res.status(200).json({ success: true, message: "Username updated successfully" });
+    }
+}
+
+export function emailControl(res: Response, user: { id: number } | undefined, data: { email: string }) {
+    const result = changeEmail(user!.id, data.email);
+    if (!result.success) {
+        return res.status(400).json({ success: false, error: result.error });
+    } else {
+        return res.status(200).json({ success: true, message: result.message });
     }
 }

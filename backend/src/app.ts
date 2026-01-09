@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "./swagger";
 import askRouter from './routers/askRouter';
 import authRouter from './routers/authRouter';
 import calendarRouter from './routers/calendarRouter';
@@ -17,6 +19,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 /* Routes */
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/ask', authMiddleware, askRouter);
 app.use('/auth', authRouter);
 app.use('/calendar', authMiddleware, calendarRouter);
