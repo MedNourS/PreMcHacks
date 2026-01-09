@@ -6,7 +6,7 @@ db.run(`
     CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         username TEXT NOT NULL UNIQUE,
-        email TEXT,
+        email TEXT NOT NULL UNIQUE,
         password_hash TEXT,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
@@ -17,14 +17,15 @@ db.run(`
         user_id INTEGER NOT NULL,
         title TEXT NOT NULL,
         description TEXT,
-        due_date DATETIME,
+        start_time DATETIME,
+        end_time DATETIME,
         completed INTEGER DEFAULT 0,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
     );
 
-    CREATE TABLE IF NOT EXISTS calendar_entries (
+    CREATE TABLE IF NOT EXISTS calendar (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         user_id INTEGER NOT NULL,
         title TEXT NOT NULL,
