@@ -13,7 +13,10 @@ import { authMiddleware, testMiddleware } from './middleware';
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true,
+}));
 app.use(cookieParser(`${process.env.SIGNING_SECRET}`));
 app.use(express.json());
 app.use(morgan('dev'));
@@ -24,6 +27,6 @@ app.use('/ask', authMiddleware, askRouter);
 app.use('/auth', authRouter);
 app.use('/calendar', authMiddleware, calendarRouter);
 app.use('/tasks', authMiddleware, tasksRouter);
-app.use('/user', testMiddleware, userRouter);
+app.use('/user', authMiddleware, userRouter);
 
 export default app;
