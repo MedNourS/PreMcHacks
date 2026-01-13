@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom"
 
 function SignUpPage() {
+    const navigate = useNavigate();
     const [userInfo, setUserInfo] = useState({
         username: "",
         email: "",
