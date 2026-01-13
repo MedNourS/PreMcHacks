@@ -2,8 +2,8 @@ import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-d
 import { useEffect, useState } from 'react';
 import SignUpPage from './pages/SignUpPage';
 import LoginPage from './pages/LoginPage';
-import Dashboard from '';
-import Home from ''
+import Dashboard from './pages/Dashboard';
+import Home from './pages/Home'
 import './index.css'
 
 function App() {

@@ -1,10 +1,20 @@
 import { useState } from 'react';
 
 function SignUpPage() {
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [userInfo, setUserInfo] = useState({
+        username: "",
+        email: "",
+        password: "",
+    });
     const [status, setStatus] = useState('');
+
+    const handleInput = (e) => {
+        const { name, value } = e.target;
+        setUserInfo(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    }
 
     async function handleSignUp() {
         try {
@@ -14,11 +24,7 @@ function SignUpPage() {
                     'Content-Type': 'application/json',
                 },
                 credentials: 'include',
-                body: JSON.stringify({
-                    username,
-                    email,
-                    password,
-                }),
+                body: JSON.stringify(userInfo),
             });
 
             if (!res.ok) {
@@ -35,13 +41,13 @@ function SignUpPage() {
     return (
         <>
           <div className="login-box">
-                <label htmlFor="identifier">Username</label>
+                <label htmlFor="username">Username</label>
                 <input
                     type="text"
-                    name="identifier"
-                    id="identifier"
-                    value={username}
-                    onChange={e => setUsername(e.target.value)}
+                    name="username"
+                    id="username"
+                    value={userInfo.username}
+                    onChange={handleInput}
                 />
 
                 <label htmlFor="email">Email</label>
@@ -49,8 +55,8 @@ function SignUpPage() {
                     type="email"
                     name="email"
                     id="email"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
+                    value={userInfo.email}
+                    onChange={handleInput}
                 />
 
                 <label htmlFor="password">Password</label>
@@ -58,8 +64,8 @@ function SignUpPage() {
                     type="password"
                     name="password"
                     id="password"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
+                    value={userInfo.password}
+                    onChange={handleInput}
                 />
 
                 <button onClick={handleSignUp}>Sign Up!</button>
