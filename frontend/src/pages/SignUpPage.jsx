@@ -34,7 +34,7 @@ function SignUpPage() {
 
     return (
         <>
-            <div className="login-box">
+          <div className="login-box">
                 <label htmlFor="identifier">Username</label>
                 <input
                     type="text"
@@ -42,16 +42,16 @@ function SignUpPage() {
                     id="identifier"
                     value={username}
                     onChange={e => setUsername(e.target.value)}
-                /><br />
+                />
 
                 <label htmlFor="email">Email</label>
                 <input
-                    type="text"
+                    type="email"
                     name="email"
                     id="email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
-                /><br />
+                />
 
                 <label htmlFor="password">Password</label>
                 <input
@@ -60,12 +60,12 @@ function SignUpPage() {
                     id="password"
                     value={password}
                     onChange={e => setPassword(e.target.value)}
-                /><br />
+                />
 
                 <button onClick={handleSignUp}>Sign Up!</button>
 
                 <div className="status">{status}</div>
-            </div>
+          </div>
         </>
     );
 }
