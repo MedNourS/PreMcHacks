@@ -5,4 +5,47 @@
   --font-Roboto: "Roboto", sans-serif;
   --font-Domine: "Domine", serif;
   --font-Sans: "Open Sans", sans-serif;
+
+
+  --fc-border-color: black;
+  --fc-daygrid-event-dot-width: 5px;
+  --fc-page-bg-color: black;
+}
+
+.fc-media-screen{
+  @apply bg-gradient-to-br from-neutral-100 to-neutral-300
+}
+
+.fc-header-toolbar{
+  @apply h-16 !mb-0 bg-neutral-50 sticky top-0 z-10
+}
+
+.fc-button{
+  @apply !bg-neutral-800
+}
+
+.fc-button-group{
+  @apply mx-10
+}
+
+.fc-toolbar-title{
+  @apply !text-4xl font-Sans font-bold
+}
+
+.fc-scrollgrid-section-header{
+  @apply text-lg font-Sans bg-neutral-50 sticky top-14 z-10 
+}
+
+.fc-scrollgrid-section-body{
+}
+
+.fc-timegrid-divider{
+}
+
+.fc-timegrid-slot-label{
+
+}
+
+.fc-timegrid-slot-lane{
+
 }
