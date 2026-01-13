@@ -26,7 +26,7 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/ask', authMiddleware, askRouter);
 app.use('/auth', authRouter);
 app.use('/calendar', authMiddleware, calendarRouter);
-app.use('/events', testMiddleware, eventsRouter);
+app.use('/events', authMiddleware, eventsRouter);
 app.use('/user', authMiddleware, userRouter);
 
 export default app;
