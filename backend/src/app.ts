@@ -7,7 +7,7 @@ import { swaggerSpec } from "./swagger";
 import askRouter from './routers/askRouter';
 import authRouter from './routers/authRouter';
 import calendarRouter from './routers/calendarRouter';
-import tasksRouter from './routers/tasksRouter';
+import eventsRouter from './routers/eventsRouter';
 import userRouter from './routers/userRouter';
 import { authMiddleware, testMiddleware } from './middleware';
 
@@ -26,7 +26,7 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/ask', authMiddleware, askRouter);
 app.use('/auth', authRouter);
 app.use('/calendar', authMiddleware, calendarRouter);
-app.use('/tasks', authMiddleware, tasksRouter);
+app.use('/events', testMiddleware, eventsRouter);
 app.use('/user', authMiddleware, userRouter);
 
 export default app;
