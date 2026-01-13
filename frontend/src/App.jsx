@@ -1,11 +1,14 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import LoginPage from './pages/LoginPage';
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom'
 import { useEffect, useState } from 'react';
 import SignUpPage from './pages/SignUpPage';
+import LoginPage from './pages/LoginPage';
+import Dashboard from '';
+import Home from ''
+import './index.css'
 
 function App() {
   const [isSignedIn, setIsSignedIn] = useState(false);
-
+  
   useEffect(() => {
     async function getUser() {
       const res = await fetch('http://localhost:3000/user/profile', {
@@ -26,21 +29,19 @@ function App() {
   }, []);
 
   return (
-    <>
-      <BrowserRouter>
-        {
-          (isSignedIn)
-            ? <Routes> // If signed in
-              
+      <Router>
+          {(isSignedIn)
+            ? <Routes>
+              <Route path="/dashboard" element={<Dashboard />} />
             </Routes>
-            : <Routes> // If not signed in
+            : <Routes>
+              <Route path="/" element={<Home />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignUpPage />} />
               <Route path="*" element={<Navigate to="/login" replace />} />
             </Routes>
-        }
-      </BrowserRouter>
-    </>
+          }
+      </Router>
   )
 }
 
