@@ -33,6 +33,7 @@ function App() {
           {(isSignedIn)
             ? <Routes>
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="*" element={<Navigate to="/dashboard" replace />} />
             </Routes>
             : <Routes>
               <Route path="/" element={<Home />} />
