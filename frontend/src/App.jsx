@@ -7,7 +7,7 @@ import Home from './pages/Home'
 import './index.css'
 
 function App() {
-  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [isSignedIn, setIsSignedIn] = useState(true);
   
   useEffect(() => {
     async function getUser() {

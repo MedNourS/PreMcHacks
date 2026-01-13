@@ -1,3 +1,6 @@
+import FullCalendar from '@fullcalendar/react'
+import timeGridPlugin from '@fullcalendar/timegrid'
+
 function Dashboard() {
     const [events, setEvents] = useState([]);
 
@@ -23,7 +26,15 @@ function Dashboard() {
 
     return (
         <>
-            <h1>Dashboard</h1>
+          <FullCalendar 
+            plugins={[timeGridPlugin]}
+            initialView='timeGridWeek'
+            headerToolbar={{
+              left: 'prev,next',
+              center: 'title',
+              right: 'timeGridWeek,timeGridDay'
+            }}
+          />
         </>
     );
 }
