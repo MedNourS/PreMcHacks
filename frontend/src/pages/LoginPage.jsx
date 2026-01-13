@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom"
 
 function LoginPage() {
+    const navigate = useNavigate();
     const [userInfo, setUserInfo] = useState({
         username: "",
         password: "",
@@ -14,7 +16,7 @@ function LoginPage() {
         }));
     }
 
-    const [status, setStatus] = useState('');
+    const [statusMessage, setStatusMessage] = useState('');
 
     async function handleLogin() {
         try {
@@ -28,20 +30,21 @@ function LoginPage() {
             });
 
             if (!res.ok) {
-                setStatus('Login failed');
+                setStatusMessage('Login failed');
             } else {
-                window.location.reload();
+                navigate('/dashboard');
             }
 
         } catch (err) {
-            console.log(err)
+            setStatusMessage('Login failed');
+            console.log(err);
         }
     }
 
     return (
         <div className="w-screen h-screen flex justify-center items-center bg-[url(../../public/Wave.svg)] bg-cover">
             <div className="w-[500px] p-16 flex flex-col shadow-2xl/60 rounded-xl bg-gradient-to-br from-neutral-900 to-neutral-800">
-                <h1 className="mb-12 font-Domine text-center text-6xl text-neutral-100">TimeFrame</h1>
+                <h1 className="mb-12 font-Domine text-center underline text-6xl text-neutral-100">TimeFrame</h1>
                 <h1 className="mb-2 font-Sans text-md text-neutral-400">Sign in</h1>
                 <label className="font-Sans text-lg text-neutral-100" htmlFor="username">Username or Email</label>
                 <input
@@ -63,10 +66,10 @@ function LoginPage() {
                 />
                 <button 
                   onClick={handleLogin}
-                  className="p-2 font-Sans text-xl font-semibold text-neutral-100 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 transition hover:from-blue-400 hover:to-blue-500"
+                  className="mb-4 p-2 font-Sans text-xl font-semibold text-neutral-100 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 transition hover:from-blue-400 hover:to-blue-500"
                 >Login!</button>
 
-                <div className="status">{status}</div>
+               <h2 className="mb-2 text-lg text-red-600">{statusMessage}</h2>
                 <button 
                   className="p-2 w-fit font-Sans text-lg text-blue-300 rounded-lg transition hover:bg-neutral-800"
                   
