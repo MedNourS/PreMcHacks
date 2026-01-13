@@ -6,7 +6,7 @@ function SignUpPage() {
         email: "",
         password: "",
     });
-    const [status, setStatus] = useState('');
+    const [statusMessage, setStatusMessage] = useState('');
 
     const handleInput = (e) => {
         const { name, value } = e.target;
@@ -26,23 +26,22 @@ function SignUpPage() {
                 credentials: 'include',
                 body: JSON.stringify(userInfo),
             });
-
             if (!res.ok) {
-                setStatus('Sign Up failed');
+                setStatusMessage('Sign up failed. Please try again.');
             } else {
-                window.location.reload();
+                navigate('/login');
             }
-
         } catch (err) {
-            console.log(err)
+            console.log(err);
+            setStatusMessage('Sign up failed. Please try again.');
         }
     }
 
     return (
         <div className="w-screen h-screen flex justify-center items-center bg-[url(../../public/Wave.svg)] bg-cover">
             <div className="w-[500px] p-18 flex flex-col shadow-2xl/60 rounded-xl bg-gradient-to-br from-neutral-900 to-neutral-800">
-                <h1 className="mb-12 font-Domine text-center text-6xl text-neutral-100">TimeFrame</h1>
-                <h1 className="mb-2 font-Sans text-md text-neutral-400">Sign Up</h1>
+                <h1 className="mb-12 font-Domine text-center underline text-6xl text-neutral-100">TimeFrame</h1>
+                <h2 className="mb-2 font-Sans text-md text-neutral-400">Sign Up</h2>
                 <label className="font-Sans text-lg text-neutral-100" htmlFor="username">Username</label>
                 <input
                     className="mb-4 p-0.5 rounded-md text-neutral-900 bg-neutral-100"
@@ -75,9 +74,9 @@ function SignUpPage() {
 
                 <button 
                   onClick={handleSignUp}
-                  className="p-2 font-Sans text-xl font-semibold text-neutral-100 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 transition hover:from-blue-400 hover:to-blue-500"
+                  className="mb-4 p-2 font-Sans text-xl font-semibold text-neutral-100 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 transition hover:from-blue-400 hover:to-blue-500"
                 >Sign Up!</button>
-                <div className="status">{status}</div>
+                <h2 className="mb-2 text-lg text-red-600">{statusMessage}</h2>
                 <button 
                   className="p-2 w-fit font-Sans text-lg text-blue-300 rounded-lg transition hover:bg-neutral-800"
                   
