@@ -9,7 +9,7 @@ function Home(){
 
     return(
         <div className="w-screen h-screen flex justify-center items-center bg-[url(../../public/Wave.svg)] bg-cover">
-            <div className="p-18 flex flex-col text-center shadow-2xl/60 rounded-xl bg-gradient-to-br from-neutral-900 to-neutral-800">
+            <div className="w-[500px] p-18 flex flex-col text-center shadow-2xl/60 rounded-xl bg-gradient-to-br from-neutral-900 to-neutral-800">
                 <h1 className="font-Domine text-6xl text-neutral-100">TimeFrame</h1>
 
                 <p className="mb-12 font-Sans text-xl text-neutral-400">modern solution to old schedules</p>
