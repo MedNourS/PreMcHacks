@@ -1,8 +1,19 @@
 import { useState } from 'react';
 
 function LoginPage() {
-    const [identifier, setIdentifier] = useState('');
-    const [password, setPassword] = useState('');
+    const [userInfo, setUserInfo] = useState({
+        username: "",
+        password: "",
+    });
+
+    const handleInput = (e) => {
+        const { name, value } = e.target;
+        setUserInfo(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    }
+
     const [status, setStatus] = useState('');
 
     async function handleLogin() {
@@ -13,10 +24,7 @@ function LoginPage() {
                     'Content-Type': 'application/json',
                 },
                 credentials: 'include',
-                body: JSON.stringify({
-                    identifier,
-                    password,
-                }),
+                body: JSON.stringify(userInfo),
             });
 
             if (!res.ok) {
@@ -33,13 +41,13 @@ function LoginPage() {
     return (
         <>
             <div className="login-box">
-                <label htmlFor="identifier">Username or Email</label>
+                <label htmlFor="username">Username or Email</label>
                 <input
                     type="text"
-                    name="identifier"
-                    id="identifier"
+                    name="username"
+                    id="username"
                     value={identifier}
-                    onChange={e => setIdentifier(e.target.value)}
+                    onChange={handleInput}
                 /><br />
 
                 <label htmlFor="password">Password</label>
@@ -48,7 +56,7 @@ function LoginPage() {
                     name="password"
                     id="password"
                     value={password}
-                    onChange={e => setPassword(e.target.value)}
+                    onChange={handleInput}
                 /><br />
 
                 <button onClick={handleLogin}>Login!</button>
